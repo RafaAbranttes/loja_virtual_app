@@ -38,7 +38,7 @@ class ProductData {
     this._description = description;
   }
 
-  String get descrition {
+  String get description {
     return this._description;
   }
 
