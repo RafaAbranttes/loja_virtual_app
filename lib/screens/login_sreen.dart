@@ -3,8 +3,17 @@ import 'package:lojavirtualestudo/models/user_model.dart';
 import 'package:lojavirtualestudo/screens/signup_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+
+  final _emailController = TextEditingController();
+
+  final _passController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +51,7 @@ class LoginScreen extends StatelessWidget {
               padding: EdgeInsets.all(16.0),
               children: [
                 TextFormField(
+                  controller: _emailController,
                   decoration: InputDecoration(hintText: "E-mail"),
                   keyboardType: TextInputType.emailAddress,
                   // ignore: missing_return
@@ -55,6 +65,7 @@ class LoginScreen extends StatelessWidget {
                   height: 16.0,
                 ),
                 TextFormField(
+                  controller: _passController,
                   decoration: InputDecoration(hintText: "Senha"),
                   obscureText: true,
                   // ignore: missing_return
@@ -87,7 +98,12 @@ class LoginScreen extends StatelessWidget {
                     onPressed: () {
                       if (_formKey.currentState.validate()) {}
 
-                      model.signIn();
+                      model.signIn(
+                        email: _emailController.text,
+                        pass: _passController.text,
+                        onSuccess: _onSuccess,
+                        onFail: _onFail,
+                      );
                     },
                     child: Text(
                       "Entrar",
@@ -102,6 +118,20 @@ class LoginScreen extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+
+  void _onSuccess() {
+    Navigator.of(context).pop();
+  }
+
+  void _onFail() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Falha ao Entrar!"),
+        backgroundColor: Colors.redAccent,
+        duration: Duration(seconds: 2),
       ),
     );
   }

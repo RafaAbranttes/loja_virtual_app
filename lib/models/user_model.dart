@@ -38,14 +38,24 @@ class UserModel extends Model {
     });
   }
 
-  void signIn() async {
+  void signIn(
+      {@required String email,
+      @required String pass,
+      @required VoidCallback onSuccess,
+      @required VoidCallback onFail}) async {
     isLoading = true;
     notifyListeners();
 
-    await Future.delayed(Duration(seconds: 5));
-
-    isLoading = false;
-    notifyListeners();
+    _auth.signInWithEmailAndPassword(email: email, password: pass).then((user) {
+      firebaseUser = user;
+      onSuccess();
+      isLoading = false;
+      notifyListeners();
+    }).catchError((error) {
+      onFail();
+      isLoading = false;
+      notifyListeners();
+    });
   }
 
   Future<void> singOut() async {
