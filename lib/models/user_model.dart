@@ -9,6 +9,10 @@ class UserModel extends Model {
   FirebaseUser firebaseUser;
   Map<String, dynamic> userData = Map();
 
+  static UserModel of(BuildContext context) {
+    return ScopedModel.of<UserModel>(context);
+  }
+
   //usuario atual
   bool isLoading = false;
 

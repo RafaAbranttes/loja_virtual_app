@@ -18,6 +18,14 @@ class ProductData {
     this._sizes = snapshot.data["sizes"];
   }
 
+  Map<String, dynamic> toResumedMap() {
+    return {
+      "title": this._title,
+      "description": this._description,
+      "price": this._price,
+    };
+  }
+
   set id(String id) {
     this._id = id;
   }
@@ -64,5 +72,13 @@ class ProductData {
 
   List get sizes {
     return this._sizes;
+  }
+
+  set category(String category) {
+    this._category = category;
+  }
+
+  String get category {
+    return _category;
   }
 }
