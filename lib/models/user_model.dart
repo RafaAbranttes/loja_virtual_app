@@ -21,6 +21,8 @@ class UserModel extends Model {
     super.addListener(listener);
 
     _loadCurrentUser();
+
+    
   }
 
   void signUp(
