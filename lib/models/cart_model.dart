@@ -7,6 +7,8 @@ import 'package:scoped_model/scoped_model.dart';
 class CartModel extends Model {
   UserModel user;
   List<CartProduct> products = [];
+  String coupomCode;
+  int discountPercentage = 0;
 
   bool isLoading = false;
 
@@ -69,6 +71,11 @@ class CartModel extends Model {
         .updateData(cartProduct.toMap());
 
     notifyListeners();
+  }
+
+  void setCoupon(String couponCode, int discountPercentage) {
+    this.coupomCode = couponCode;
+    this.discountPercentage = discountPercentage;
   }
 
   void incProduct(CartProduct cartProduct) {
