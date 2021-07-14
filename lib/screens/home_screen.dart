@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lojavirtualestudo/tabs/home_tab.dart';
 import 'package:lojavirtualestudo/tabs/orders_tab.dart';
+import 'package:lojavirtualestudo/tabs/places_tab.dart';
 import 'package:lojavirtualestudo/tabs/products_tab.dart';
 import 'package:lojavirtualestudo/widgets/cart_button.dart';
 import 'package:lojavirtualestudo/widgets/custom_drawer.dart';
@@ -28,8 +29,13 @@ class HomeScreen extends StatelessWidget {
           body: ProductsTab(),
           floatingActionButton: CartButton(),
         ),
-        Container(
-          color: Colors.yellow,
+        Scaffold(
+          appBar: AppBar(
+            title: Text("Lojas"),
+            centerTitle: true,
+          ),
+          body: PlacesTab(),
+          drawer: CustomDrawer(_pageController),
         ),
         Scaffold(
           appBar: AppBar(
